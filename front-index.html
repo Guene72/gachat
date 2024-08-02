@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="libs/img/icon_dark.png" type="image/x-icon">
+    <title>Achats</title>
+    <!-- CSS loading -->
+    <!-- Vendor -->
+    <link rel="stylesheet" href="libs/vendor/font-awesome-pro/css/all.css">
+    <!-- Inbuilt -->
+    <link rel="stylesheet" href="libs/css/commande.css">
+    <!-- JS loading -->
+    <!-- Vendor -->
+    <!-- Inbuilt -->
+</head>
+<body>
+    <div id="main-container">
+        <!-- Les notifications (infos bulles) -->
+        <div id="notifications">
+            <!-- Attente -->
+            <div class="wait" _show-timeout _no-cancel text="Execution dans 5s">
+                <div class="box">
+                    <svg width="500" height="500" viewBox="0 0 500 500">
+                        <circle static cx="250" cy="250" r="200" stroke-width="80" fill="transparent" />
+                        <circle dynamic cx="250" cy="250" r="200" stroke="currentColor" stroke-width="80" stroke-linecap="round"
+                            fill="transparent" />
+                    </svg>
+                </div>
+            </div>
+            <!-- Temporaires -->
+            <div class="notifications-list">
+                <div class="notification" state="good" _show>
+                    <span class="head">Connexion reussie</span>
+                    <span class="body">Content de vous revoir KOFFI</span>
+                </div>
+                <div class="notification" state="bad" _show>
+                    <span class="head">Connexion impossible</span>
+                    <span class="body">Ces identifiants sont incorrects</span>
+                </div>
+                <div class="notification" state="bad" _show>
+                    <span class="head">Connexion impossible</span>
+                    <span class="body">Ces identifiants que vosu avez entrez sont incorrect</span>
+                </div>
+            </div>
+        </div>
+        <!-- Les fenêtres modals -->
+        <div id="modal">
+            <div class="modal-box" name="commande-item"> 
+                <div class="content">
+                    <div class="head">
+                        <div class="title"><i class="fa-duotone fa-fingerprint"></i> REFERENCE: 2023-55415/FR-856</div>
+                        <button title="Fermer" class="cool-btn btn-small btn-icon btn-red"><i class="fa-regular fa-times"></i></button>
+                    </div>
+                    <div class="body">
+                        <div class="about-commande">
+                            <div class="commande-info">
+                                <div class="info-header">A propos de la commande</div>
+                                <span class="info-state" state="Rejétée"></span>
+                                <div class="info-content">
+                                   
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-location-dot"></i>Site</span>
+                                        <span class="line-value">BLEDJA 2</span>
+                                    </div>
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-calendar-day"></i>Emis le</span>
+                                        <span class="line-value">15 Jan 2023</span>
+                                    </div>
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-cart-shopping"></i>Description</span>
+                                        <span class="line-value">Reapprovisionnement de savon</span>
+                                    </div>
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-users"></i>Emeteur</span>
+                                        <span class="line-value">Service Logistique</span>
+                                    </div>
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-user-tag"></i>Fournisseur</span>
+                                        <span class="line-value">GARAGE SIMON</span>
+                                    </div>
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-badge-dollar"></i>Montant</span>
+                                        <span class="line-value">17 800 000 F CFA</span>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="commande-actions">
+                                <div class="actions-docs">
+                                    <div class="cool-file-input read-file">
+                                        <label for="file-import-1" title="Téléchager le fichier">Expression de besoin</label>
+                                        <input type="file" id="file-import-1" hidden>
+                                        <i class="fa-solid fa-pen edit" title="Importer un nouveau fichier"></i>
+                                    </div>
+                                    <div class="cool-file-input">
+                                        <label for="file-import-2" title="Importer un fichier">Facture Proforma</label>
+                                        <input type="file" id="file-import-2" hidden>
+                                        <i class="fa-solid fa-pen edit" title="Importer un nouveau fichier"></i>
+                                    </div>
+                                </div>
+                                <div class="actions-status">
+                                    <button class="cool-btn btn-large btn-icon btn-green" title="Valider commande"><i class="fa-regular fa-check"></i></button>
+                                    <button class="cool-btn btn-large btn-icon btn-red" title="Rejeter commande"><i class="fa-regular fa-times"></i></button>
+                                    <button class="cool-btn btn-large btn-icon btn-blue" title="Imprimer commande"><i class="fa-regular fa-print"></i></button>
+                                    <!-- <button class="cool-btn btn-large btn-icon btn-red" title="Supprimer commande"><i class="fa-regular fa-trash"></i></button> -->
+                                    <button class="cool-btn btn-large btn-icon btn-blue" title="Imprimer duplicata"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-detail">
+                            <div class="detail-header">Désignation de la commande</div>
+                            <div class="cool-table-2 cool-scroll-bar">
+                                <div class="table-head">
+                                    <span class="large-content">Materiel</span>
+                                    <span class="medium-content align-center">Unité</span>
+                                    <span class="align-center">Qté</span>
+                                    <span class="medium-content align-center">Prix U</span>
+                                    <span class="medium-content align-center">Prix T</span>
+                                    <span class="align-center">Livré</span>
+                                </div>
+                                <div class="table-body">
+                                    
+                                    <div class="body-item no-delivery">
+                                        <div class="item-value">
+                                            <span class="large-content">ACHAT DE SAVON LIQUIDE</span>
+                                            <span class="medium-content align-center">METRE CUBE</span>
+                                            <span class="align-center">10 750</span>
+                                            <span class="medium-content align-center">9 999 999 F</span>
+                                            <span class="medium-content align-center">999 999 999 F</span>
+                                            <span class="align-center pure-value" value="750"></span>
+                                        </div>
+                                        <div class="item-child"></div>
+                                    </div>
+                                    <div class="body-item no-delivery">
+                                        <div class="item-value">
+                                            <span class="large-content">ACHAT DE SAVON LIQUIDE</span>
+                                            <span class="medium-content align-center">METRE CUBE</span>
+                                            <span class="align-center">10 750</span>
+                                            <span class="medium-content align-center">9 999 999 F</span>
+                                            <span class="medium-content align-center">999 999 999 F</span>
+                                            <span class="align-center pure-value" value="750"></span>
+                                        </div>
+                                        <div class="item-child"></div>
+                                    </div>
+                                    <div class="body-item item-collapse">
+                                        <div class="item-value">
+                                            <span class="large-content">ACHAT DE SAVON LIQUIDE</span>
+                                            <span class="medium-content align-center">METRE CUBE</span>
+                                            <span class="align-center">10 750</span>
+                                            <span class="medium-content align-center">9 999 999 F</span>
+                                            <span class="medium-content align-center">999 999 999 F</span>
+                                            <span class="align-center pure-value" value="750"></span>
+                                        </div>
+                                        <div class="item-child">
+                                            <div class="receipt-item">
+                                                <span class="large"><i class="fa-regular fa-calendar-day"></i> 27 Decembre 2022</span>
+                                                <span><i class="fa-regular fa-boxes-stacked"></i> 250 U</span>
+                                                <span class="x-large"><i class="fa-regular fa-truck"></i> SERY GUY ROGER</span>
+                                            </div>
+                                            <div class="receipt-item">
+                                                <span class="large"><i class="fa-regular fa-calendar-day"></i> 27 Mai 2022</span>
+                                                <span><i class="fa-regular fa-boxes-stacked"></i> 1 999 U</span>
+                                                <span class="x-large"><i class="fa-regular fa-truck"></i> KOUAME ULRICH PASCAL MICHEL</span>
+                                            </div>
+                                            <div class="receipt-item">
+                                                <span class="large"><i class="fa-regular fa-calendar-day"></i> 27 Decembre 2022</span>
+                                                <span><i class="fa-regular fa-boxes-stacked"></i> 250 U</span>
+                                                <span class="x-large"><i class="fa-regular fa-truck"></i> SERY GUY ROGER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="body-item delivery-ok">
+                                        <div class="item-value">
+                                            <span class="large-content">ACHAT DE SAVON LIQUIDE</span>
+                                            <span class="medium-content align-center">METRE CUBE</span>
+                                            <span class="align-center">10 750</span>
+                                            <span class="medium-content align-center">9 999 999 F</span>
+                                            <span class="medium-content align-center">999 999 999 F</span>
+                                            <span class="align-center pure-value" value="750"></span>
+                                        </div>
+                                        <div class="item-child">
+                                            <div class="body-item">
+                                                <div class="item-value">
+                                                    <span>27/01/2023</span>
+                                                    <span>750</span>
+                                                    <span class="large-content">SERY GUY ROGER</span>
+                                                </div>
+                                                <div class="item-value">
+                                                    <span>27/01/2023</span>
+                                                    <span>750</span>
+                                                    <span class="large-content">SERY GUY ROGER</span>
+                                                </div>
+                                                <div class="item-value">
+                                                    <span>27/01/2023</span>
+                                                    <span>750</span>
+                                                    <span class="large-content">SERY GUY ROGER</span>
+                                                </div>
+                                                <div class="item-value">
+                                                    <span>27/01/2023</span>
+                                                    <span>750</span>
+                                                    <span class="large-content">SERY GUY ROGER</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-box" name="edit-commande" >
+                <div class="content">
+                    <div class="head">
+                        <div class="title"><i class="fa-duotone fa-cart-circle-plus"></i> Nouvelle Commande</div>
+                        <button title="Fermer" class="cool-btn btn-small btn-icon btn-red"><i class="fa-regular fa-times"></i></button>
+                    </div>
+                    <div class="body">
+                        <div class="steps-list">
+                            <div class="a-step finish-step" style="z-index: 5" step-name="about-commande">
+                                <div class="cool-input-1" state="_good" vname="nc-emeteur">
+                                    <label for="nc-emeteur" title="Saisir l'emeteur"><i class="fa-duotone fa-user"></i></label>
+                                    <input type="text" id="nc-emeteur" list="data-nc-emeteur" placeholder="Emetteur">
+                                    <datalist id="data-nc-emeteur">
+                                        <option value="STATISTIQUE">
+                                        <option value="INFORMATIQUE ET TECHNOLOGIE">
+                                        <option value="ACHAT">
+                                        <option value="GESTION DES STOCKS">
+                                        <option value="LOGISTIQUE">
+                                        <option value="COMPTABILITE">
+                                        <option value="RESSOURCE HUMAINE">
+                                        <option value="COMMUNICATION">
+                                        <option value="COMMERCIAL">
+                                        <option value="AUDIT INTERNE">
+                                        <option value="CONTRÔLE DE GESTION">
+                                        <option value="QUALITE">
+                                    </datalist>
+                                </div>
+                                <div class="cool-input-1" state="_bad" _error="Ce site n'existe pas !" vname="nc-site">
+                                    <label for="nc-site" title="Saisir le site"><i class="fa-duotone fa-location-dot"></i></label>
+                                    <input type="text" id="nc-site" list="data-nc-site" placeholder="Site">
+                                    <datalist id="data-nc-site">
+                                        <option value="TRESOR">
+                                        <option value="BLEDJA ANNEXE">
+                                    </datalist>
+                                </div>
+                                <div class="cool-input-1" vname="nc-description">
+                                    <label for="nc-description" title="Saisir la description"><i class="fa-duotone fa-cart-shopping"></i></label>
+                                    <input type="text" id="nc-description" list="data-nc-description" placeholder="Description">
+                                    <datalist id="data-nc-description">
+                                        <option value="ACHAT D'AGGLOS HOURDIS 16 AMERICAIN">
+                                    </datalist>
+                                </div>
+                                <div class="cool-input-1" vname="nc-fournisseur">
+                                    <label for="nc-fournisseur" title="Saisir le fournisseur"><i class="fa-duotone fa-user-tag"></i></label>
+                                    <input type="text" id="nc-fournisseur" list="data-nc-fournisseur" placeholder="Fournisseur">
+                                    <datalist id="data-nc-fournisseur">
+                                        <option value="UNIVERSELLE INDUSTRIES/ GILBERT">
+                                    </datalist>
+                                </div>
+                                
+                            </div>
+                            <div class="a-step _finish-step" style="z-index: 4" step-name="designation-commande">
+                                <div class="designation-commande">
+                                    <div class="designation-controls">
+                                        <span class="controls-count" value="9"><i class="fa-regular fa-tags"></i></span>
+                                        <div class="controls-add">
+                                            <input type="number" value="1">
+                                            <button class="cool-btn btn-small btn-icon btn-gray-dark"><i class="fa-solid fa-plus-large"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="designation-list cool-scroll-bar">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fa-regular fa-tag"></i> Materiel</th>
+                                                    <th><i class="fa-regular fa-badge-percent"></i> Unité</th>
+                                                    <th><i class="fa-regular fa-boxes-stacked"></i> Qté</th>
+                                                    <th><i class="fa-regular fa-badge-dollar"></i> Prix</th>
+                                                    <th><i class="fa-regular fa-sack-dollar"></i> Total</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td state="good" name="materiel">
+                                                        <input type="text" placeholder="&#xf304" list="data-materiel">
+                                                    </td>
+                                                    <td state="bad" name="unite">
+                                                        <input type="text" placeholder="&#xf304" list="data-unite">
+                                                    </td>
+                                                    <td name="qte"><input type="float" placeholder="&#xf304" list=""></td>
+                                                    <td name="prix">
+                                                        <input type="text" placeholder="&#xf304" list="data-prix">
+                                                    </td>
+                                                    <td name="total">0 F</td>
+                                                    <td name="delete"><i class="fa-duotone fa-trash"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="sub">
+                                        <button class="cool-btn btn-small btn-icon btn-red" title="Supprimer la dernière ligne"><i class="fa-solid fa-minus-large"></i></button>
+                                        <span class="designation-total" value="9 999 999 999 F CFA"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="a-step finish-step" style="z-index: 3" step-name="checking-fournisseur">
+                                <span class="step-info"><i class="fa-regular fa-circle-info"></i> Vous avez inscrit un nouveau fournisseur.<br>Merci de completer les informations necessaires.</span>
+                                <span class="fournisseur-name"><i class="fa-duotone fa-user-tag"></i>BIGCIM</span>
+                                <div class="fournisseur-phone">
+                                     <div class="cool-input-1" _error="Ce format est incorrect" vname="fournisseur-phone">
+                                    <label for="fournisseur-phone" title="Saisir le contact"><i class="fa-duotone fa-phone-rotary"></i></label>
+                                    <input type="text" id="fournisseur-phone" placeholder="Contact">
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="a-step finish-step" style="z-index: 2" step-name="checking-materiel">
+                                <span class="step-info"><i class="fa-regular fa-circle-info"></i> Nouveau materiel détecté.<br>Merci de completer les informations necessaires.</span>
+                                <div class="category-table cool-scroll-bar">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td  class="materiel-name"><i class="fa-duotone fa-tag"></i> 12.00 R 20 KELLY KMS DE GOODYEAR 154/150Kazertyui</td>
+                                                <td class="materiel-category" state="_good">
+                                                    <i class="fa-duotone fa-layer-group"></i>
+                                                    <input type="text" placeholder="Categorie" list="data-categorie">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="a-step" style="z-index: 1" step-name="recap-commande">
+                                <div class="cool-line">
+                                    <span class="line-name"><i class="fa-regular fa-users"></i>Emeteur</span>
+                                    <span class="line-value">Service Logistique</span>
+                                </div>
+                                <div class="cool-line">
+                                    <span class="line-name"><i class="fa-regular fa-location-dot"></i>Site</span>
+                                    <span class="line-value">BLEDJA 2</span>
+                                </div>
+                                <div class="cool-line">
+                                    <span class="line-name"><i class="fa-regular fa-cart-shopping"></i>Description</span>
+                                    <span class="line-value">Reapprovisionnement de savon</span>
+                                </div>
+                                <div class="cool-line">
+                                    <span class="line-name"><i class="fa-regular fa-user-tag"></i>Fournisseur</span>
+                                    <span class="line-value">GARAGE SIMON</span>
+                                </div>
+                                <div class="cool-line">
+                                    <span class="line-name"><i class="fa-regular fa-tags"></i>Désignations</span>
+                                    <span class="line-value">17 Materiels</span>
+                                </div>
+                                <div class="cool-line">
+                                    <span class="line-name"><i class="fa-regular fa-badge-dollar"></i>Montant</span>
+                                    <span class="line-value">17 800 000 F CFA</span>
+                                </div>
+                                <br/>
+                                <div class="cool-line">
+                                    <span class="line-name"><i class="fa-regular fa-user"></i>Editeur</span>
+                                    <span class="line-value">Service Achat</span>
+                                </div>
+                                <div class="recap-action">
+                                    <div class="cool-switch" state="good">Bon d'enlevement</div>
+                                    <div class="cool-switch" state="bad">Impression différée</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="steps-resume">
+                            <div class="resume-about">
+                                <span class="complete-step" step-name="about-commande">Information Commande</span>
+                                <span class="complete-step" class="active-step" step-name="designation-commande">Designation Commande</span>
+                                <span class="complete-step" step-name="fournisseur-commande">Mise à jour Fournisseur</span>
+                                <span class="complete-step" step-name="materiel-commande">Mise à jour Materiel</span>
+                                <span class="active-step" step-name="recap-commande">Recapitulatif</span>
+                            </div>
+                            <div class="resume-bar"><span style="transform: scaleX(.2);"></span></div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="cool-btn btn-large btn-icon btn-gray"><i class="fa-regular fa-arrow-left"></i></button>
+                        <button class="cool-btn btn-large btn-blue"><i class="fa-regular fa-floppy-disk"></i> Enregistrer</button>
+                        <button class="cool-btn btn-large btn-icon btn-gray"><i class="fa-regular fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-box" name="search-result-item" _show> 
+                <div class="content">
+                    <div class="head">
+                        <div class="title"><i class="fa-duotone fa-tag"></i> Materiel</div>
+                        <button title="Fermer" class="cool-btn btn-small btn-icon btn-red"><i class="fa-regular fa-times"></i></button>
+                    </div>
+                    <div class="body">
+                        <div class="result-item-about">
+                            <div class="about-info">
+                                <div class="lib"><i class="fa-regular fa-info-circle"></i> Information du materiel</div>
+                                <div class="_content">
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-tag"></i>Nom du materiel</span>
+                                        <span class="line-value">Pointe Acier doux</span>
+                                    </div>
+                                    <div class="cool-line">
+                                        <span class="line-name"><i class="fa-regular fa-layer-group"></i>Catégorie</span>
+                                        <span class="line-value">Quincaillérie</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="about-price">
+                                <div class="lib"><i class="fa-regular fa-badge-dollar"></i> Prix par fournisseur</div>
+                                <div class="_content cool-scroll-bar">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>UNIVERSELLE INDUSTRIES</td>
+                                                <td>METRE LINEAIRE</td>
+                                                <td>17 000 F</td>
+                                            </tr>
+                                            <tr>
+                                                <td>UTC VENTE DE MATERIEL INFORMATIQUE</td>
+                                                <td>METRE LINEAIRE</td>
+                                                <td>17 000000 F</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-item-commande">
+                            <div class="lib"><i class="fa-regular fa-cart-shopping"></i> Commande réalisée</div>
+                            <div class="_content">
+                                <table>
+                                    <thead>
+                                        <th><i class="fa-regular fa-hashtag"></i></th>
+                                        <th><i class="fa-regular fa-calendar-day"></i> Date</th>
+                                        <th><i class="fa-regular fa-user-tag"></i> Fournisseur</th>
+                                        <th><i class="fa-regular fa-cart-shopping"></i> Description</th>
+                                        <th><i class="fa-regular fa-sack-dollar"></i> Montant</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>8891</td>
+                                            <td>23/12/2023</td>
+                                            <td>BTP MAT</td>
+                                            <td>Commande de pointe acier</td>
+                                            <td>999 999 99 F</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8891</td>
+                                            <td>23/12/2023</td>
+                                            <td>UTC VENTE DE MATERIEL INFORMATIQUE</td>
+                                            <td>Commande de pointe acier</td>
+                                            <td>999 999 99 F</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8891</td>
+                                            <td>23/12/2023</td>
+                                            <td>BTP MAT</td>
+                                            <td>Commande de pointe acier</td>
+                                            <td>999 999 99 F</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8891</td>
+                                            <td>23/12/2023</td>
+                                            <td>BTP MAT</td>
+                                            <td>Commande de pointe acier</td>
+                                            <td>999 999 99 F</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8891</td>
+                                            <td>23/12/2023</td>
+                                            <td>BTP MAT</td>
+                                            <td>Commande de pointe acier</td>
+                                            <td>999 999 99 F</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-box" name="connect" _show _removed _bounce>
+                <div class="content">
+                    <div class="body">
+                        <img src="libs/img/e2js-logo-2.png" alt="LOGO E2JS" class="connect-logo">
+                        <div class="connect-label">
+                            <span class="pure">Bienvenue</span>0
+                            <span>Authentifiez vous pour continuer</span>
+                        </div>
+                        <form class="connect-form">
+                            <div class="cool-input-1" state="_bad" vname="connect-id">
+                                <label for="connect-id" title="Saisir votre identifiant"><i class="fa-duotone fa-user"></i></label>
+                                <input type="text" id="connect-id" placeholder="Identifiant">
+                            </div>
+                            <div class="cool-input-1" state="_bad" vname="connect-password">
+                                <label for="connect-password" title="Saisir votre mot de passe"><i class="fa-duotone fa-lock"></i></label>
+                                <input type="password" id="connect-password" placeholder="Mot de passe">
+                                <button class="show-password" state="off" title="Afficher"></button>
+                            </div>
+                            <button title="Effectuer la connexion" class="cool-btn btn-large btn-gray-black btn-icon"><i class="fa-solid fa-right-to-bracket"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-box" name="confirm" _show>
+                <div class="content" theme="red">
+                    <div class="body">
+                        <span class="icon"></span>
+                        <span class="text">Souhaitez vous vraiment vous deconnecter ?</span>
+                    </div>
+                    <div class="actions">
+                        <!-- <input class="confirm-pass" type="text" placeholder="&#xf304" style="display: nodne;"> -->
+                        <div class="list">
+                            <button class="cool-btn btn-small btn-gray"><i class="fa-regular fa-times"></i> Annuler</button>
+                            <button class="cool-btn btn-small btn-red"><i class="fa-regular fa-check"></i> Confirmer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-box" name="modern-confirm" _show _removed _bounce>
+                <div class="content" theme="warning" sure _lock-exe>
+                    <div class="body">
+                        <span class="icon"></span>
+                        <div class="text">
+                            <span class="top">Supprimer Commande</span>
+                            <div class="is">Veuillez saisir la reference de la commande (2023-55415/FR-856) pour poursuivre la suppression</div>
+                            <input class="sure-confirm" type="text" placeholder="&#xf304">
+                        </div>
+                        <div class="options">
+                            <button class="cancel"><i class="fa-regular fa-times"></i> Annuler</button>
+                            <button class="exe"><i class="fa-regular fa-check"></i> Confirmer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Conteneur de l'application -->
+        <div id="app" dev>
+            <div class="app-left">
+                <div class="top-level">
+                    <img src="libs/img/icon_large_5.png" alt="Logo Service Achats">
+                </div>
+                <div class="bottom-level">
+                    <div class="app-sections">
+                        <span class="title">Menu <i class="fa-duotone fa-layer-group"></i></span>
+                        <div class="sections-list">
+                            <button class="cool-btn btn-large btn-blue active"><i class="fa-solid fa-cart-arrow-down"></i> Les Commandes</button>
+                        </div>
+                    </div>
+                    <div class="app-user">
+                        <span>Bienvenue <i class="fa-regular fa-hand-wave"></i></span>
+                        <div class="user-icon"><img src="libs/img/user_default.png"></div>
+                        <div class="user-info">
+                            <span class="pure">KOFFI Koko Pulcherie Amandine Laure</span>
+                            <span>Direction Generale Adjoint chargé Administration</span>
+                        </div>
+                        <img class="site-logo" src="libs/img/e2js-logo-2.png" alt="Logo E2JS">
+                    </div>
+                </div>
+            </div>
+            <div class="app-right">
+                <div class="top-level">
+                    <div class="app-section">
+                        <span class="pure"><i class="fa-duotone fa-cart-arrow-down"></i> Les Commandes</span>
+                        <span>Consultez et gerer vos commandes</span>
+                    </div>
+                    <div class="global-controls">
+                        <div class="cool-search">
+                            <div class="search-box"><input type="text" placeholder="Rechercher quelque chose ..."></div>
+                            <div class="search-result">
+                                <div class="item" tabindex="0">
+                                    <i class="fa-regular fa-tag"></i>
+                                    <span class="item-info">CADRE DE BOIS PLEIN DIM 105X220X18</span>
+                                </div>
+                                <div class="item" tabindex="0">
+                                    <i class="fa-regular fa-user-tag"></i>
+                                    <span class="item-info">BTP MAT</span>
+                                </div>
+                                <div class="item" tabindex="0">
+                                    <i class="fa-regular fa-tag"></i>
+                                    <span class="item-info">CADRE DE BOIS PLEIN DIM 105X220X18 f sf fdg fdgkhlodk lhkf kklj fshfmglhkml sfks fdfdf</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="to-do show-count" count="5">
+                            <button class="cool-btn btn-large btn-red btn-icon  "><i class="fa-regular fa-bell"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="app-content">
+                    <div class="commande-list">
+                        <div class="commande-stats">
+                            <div class="cool-stat-item stat-blue stat-edit">
+                                <span class="item-qte">175</span>
+                                <span class="item-name">Commandes émises</span>
+                                <div class="item-icon" title="Editer une commande">
+                                    <i class="fa-regular fa-cart-shopping"></i>
+                                </div>
+                            </div>
+                            <div class="cool-stat-item stat-green">
+                                <span class="item-qte">175</span>
+                                <span class="item-name">Commandes validées</span>
+                                <div class="item-icon">
+                                    <i class="fa-regular fa-cart-circle-check"></i>
+                                </div>
+                            </div>
+                            <div class="cool-stat-item stat-red">
+                                <span class="item-qte">175</span>
+                                <span class="item-name">Commandes rejetées</span>
+                                <div class="item-icon">
+                                    <i class="fa-regular fa-cart-circle-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="cool-stat-item stat-blue">
+                                <span class="item-qte">175</span>
+                                <span class="item-name">Materiels et materiaux</span>
+                                <div class="item-icon">
+                                    <i class="fa-regular fa-tag"></i>
+                                </div>
+                            </div>
+                            <div class="cool-stat-item stat-blue">
+                                <span class="item-qte">175</span>
+                                <span class="item-name">Fournisseurs</span>
+                                <div class="item-icon">
+                                    <i class="fa-regular fa-user-tag"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commande-table" busy>
+                            <div class="table-controls">
+                                <div class="left-controls">
+                                    <div class="cool-select" vname="site-selector">
+                                        <i class="fa-duotone fa-location-dot"></i>
+                                        <select>
+                                            <option value="">Tous les sites</option>
+                                            <option value="1">Siège</option>
+                                            <option value="1">BLEDJA ANNEXE</option>
+                                        </select>
+                                    </div>
+                                    <div class="state-selector">
+                                        <i class="fa-duotone fa-cart-shopping"></i>
+                                        <div class="selector-list">
+                                            <i class="item fa-regular fa-layer-group" title="Toute les commandes"></i>
+                                            <i class="item fa-regular fa-hourglass-half" title="En attente de validation"></i>
+                                            <i class="item fa-regular fa-check select" title="Commande validée"></i>
+                                            <i class="item fa-regular fa-print" title="Commande imprimée"></i>
+                                            <i class="item fa-regular fa-times" title="Commande rejetée"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input class="search-control" type="text" placeholder="Effectuer une recherche">
+                                <div class="right-controls">
+                                    <div class="period-selector">
+                                        <i class="fa-duotone fa-calendar-range"></i>
+                                        <div class="value">
+                                            <span class="begin" title="Modifier la date">Janvier 2021</span>
+                                            <i class="fa-regular fa-arrow-right"></i>
+                                            <span class="end" title="Modifier la date">Septembre 2022</span>
+                                        </div>
+                                        <div class="date-picker-list" show>
+                                            <div class="date-picker" for="first">
+                                                <div class="year-select">
+                                                    <span class="button" action="previous"><i class="fa-solid fa-chevron-left"></i></span>
+                                                    <span>2022</span>
+                                                    <span class="button" action="next"><i class="fa-solid fa-chevron-right"></i></span>
+                                                </div>
+                                                <div class="month-select">
+                                                    <div class="group">
+                                                        <span value="01">Janv</span>
+                                                        <span value="02">Févr</span>
+                                                        <span value="03">Mars</span>
+                                                    </div>
+                                                    <div class="group">
+                                                        <span value="04">Avr</span>
+                                                        <span value="05">Mai</span>
+                                                        <span value="06">Juin</span>
+                                                    </div>
+                                                    <div class="group">
+                                                        <span value="07">Juill</span>
+                                                        <span value="08">Août</span>
+                                                        <span value="09">Sept</span>
+                                                    </div>
+                                                    <div class="group">
+                                                        <span value="10">Oct</span>
+                                                        <span value="11">Nov</span>
+                                                        <span value="12">Déc</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="date-picker" for="last">
+                                                <div class="year-select">
+                                                    <span class="button" action="previous"><i class="fa-solid fa-chevron-left"></i></span>
+                                                    <span>2022</span>
+                                                    <span class="button" action="next"><i class="fa-solid fa-chevron-right"></i></span>
+                                                </div>
+                                                <div class="month-select">
+                                                    <div class="group">
+                                                        <span value="01">Janv</span>
+                                                        <span value="02">Févr</span>
+                                                        <span value="03">Mars</span>
+                                                    </div>
+                                                    <div class="group">
+                                                        <span value="04">Avr</span>
+                                                        <span value="05">Mai</span>
+                                                        <span value="06">Juin</span>
+                                                    </div>
+                                                    <div class="group">
+                                                        <span value="07">Juill</span>
+                                                        <span value="08">Août</span>
+                                                        <span value="09">Sept</span>
+                                                    </div>
+                                                    <div class="group">
+                                                        <span value="10">Oct</span>
+                                                        <span value="11">Nov</span>
+                                                        <span value="12">Déc</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <button class="cool-btn btn-small btn-blue btn-icon" action="refresh" title="Actualiser"><i class="fa-regular fa-rotate-right"></i></button>
+                                        <button class="cool-btn btn-small btn-blue btn-icon" action="export" title="Exporter"><i class="fa-regular fa-cloud-arrow-down"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cool-table cool-scroll-bar">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="align-left sorted-asc"><i class="fa-regular fa-hashtag"></i></th>
+                                            <th class="align-left"><i class="fa-regular fa-location-dot"></i> Site</th>
+                                            <th class="align-left"><i class="fa-regular fa-calendar-day"></i> Date</th>
+                                            <th class="align-left _sorted-desc"><i class="fa-regular fa-cart-shopping"></i> Description</th>
+                                            <th class="align-left"><i class="fa-regular fa-users"></i> Emeteur</th>
+                                            <th class="align-left"><i class="fa-regular fa-user-tag"></i> Fournisseur</th>
+                                            <th class="align-center"><i class="fa-regular fa-badge-dollar"></i> Montant</th>
+                                            <th class="align-center"><i class="fa-regular fa-badge-check"></i> Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="state-wait">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-validate">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-reject">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-printed">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-wait">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-validate">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-reject">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-printed">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-wait">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-validate">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-reject">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-printed">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-wait">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-validate">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-reject">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                        <tr class="state-printed">
+                                            <td class="align-left">9521</td>
+                                            <td class="align-left">Blédja Annexe</td>
+                                            <td class="align-left">23 Fevrier 2022</td>
+                                            <td class="align-left">Reapprovisionnement ciment</td>
+                                            <td class="align-left">Service technique</td>
+                                            <td class="align-left">BIG CIM</td>
+                                            <td class="align-center">70 500 000 F</td>
+                                            <td class="align-center"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-foot">
+                                <div class="foot-line"><span title="MONTANT TOTAL" class="line-name"><i  class="fa-duotone fa-sack-dollar"></i></span><span class="line-value" >125 255 033, 566 FCFA</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Datalists communs -->
+        <datalist id="data-materiel">
+            <option value="CIMENT CPJ45">
+            <option value="FER A BETON HA9">
+        </datalist>
+        <datalist id="data-unite">
+            <option value="TONNE">
+            <option value="BOTTE">
+        </datalist>
+        <datalist id="data-prix">
+            <option value="360 000">
+            <option value="500 000">
+        </datalist>
+        <datalist id="data-categorie">
+            <option value="PLOMBERIE">
+            <option value="ELECTRICITE">
+        </datalist>
+    </div>
+</body>
+</html>
